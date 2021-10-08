@@ -171,8 +171,11 @@ class OpenNSAService(twistedservice.MultiService):
         nsa_name = domain_name + ':nsa'
 
         # base url
-        base_protocol = 'https://' if vc[config.TLS] else 'http://'
-        base_url = base_protocol + vc[config.HOST] + ':' + str(vc[config.PORT])
+        if vc[config.BASE_URL]:
+            base_url = vc[config.BASE_URL]
+        else:
+            base_protocol = 'https://' if vc[config.TLS] else 'http://'
+            base_url = base_protocol + vc[config.HOST] + ':' + str(vc[config.PORT])
 
         # nsi endpoint and agent
         provider_endpoint = base_url + '/NSI/services/CS2'  # hardcode for now

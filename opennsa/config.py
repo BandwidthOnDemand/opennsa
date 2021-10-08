@@ -45,6 +45,7 @@ LOG_FILE = 'logfile'
 HOST = 'host'
 PORT = 'port'
 TLS = 'tls'
+BASE_URL = 'base_url'
 REST = 'rest'
 NRM_MAP_FILE = 'nrmmap'
 PEERS = 'peers'
@@ -251,6 +252,11 @@ def readVerifyConfig(cfg):
         vc[PORT] = cfg.getint(BLOCK_SERVICE, PORT)
     except configparser.NoOptionError:
         vc[PORT] = DEFAULT_TLS_PORT if vc[TLS] else DEFAULT_TCP_PORT
+
+    try:
+        vc[BASE_URL] = cfg.getint(BLOCK_SERVICE, BASE_URL)
+    except configparser.NoOptionError:
+        vc[BASE_URL] = None
 
     try:
         policies = cfg.get(BLOCK_SERVICE, POLICY).split(',')
