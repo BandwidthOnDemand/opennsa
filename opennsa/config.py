@@ -254,7 +254,7 @@ def readVerifyConfig(cfg):
         vc[PORT] = DEFAULT_TLS_PORT if vc[TLS] else DEFAULT_TCP_PORT
 
     try:
-        vc[BASE_URL] = cfg.getint(BLOCK_SERVICE, BASE_URL)
+        vc[BASE_URL] = cfg.get(BLOCK_SERVICE, BASE_URL)
     except configparser.NoOptionError:
         vc[BASE_URL] = None
 
