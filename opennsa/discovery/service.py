@@ -13,8 +13,6 @@ from xml.etree import ElementTree as ET
 from opennsa.shared import xmlhelper, modifiableresource
 from opennsa.discovery.bindings import discovery
 
-from traceback import print_exc
-LOG_SYSTEM = 'discovery.service'
 
 ET.register_namespace('nsi', discovery.NSI_DISCOVERY_NS)
 ET.register_namespace('gns', discovery.GNS_NS)
@@ -50,8 +48,8 @@ class DiscoveryService:
 
         try:
             peers_with.remove(self.nsa_id)
-        except:
-            print("peers_with.remove(%s):\n%s" % (self.nsa_id, print_exc()), system = LOG_SYSTEM)
+        except ValueError:
+            pass # running in aggregator-only mode
 
         nsa_element = discovery.NsaType(
             self.nsa_id,
