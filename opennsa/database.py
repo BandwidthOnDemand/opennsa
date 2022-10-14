@@ -81,7 +81,7 @@ def setupDatabase(database, user, password=None, host=None, connection_id_start=
 
     conn.close()
 
-    Registry.DBPOOL = adbapi.ConnectionPool('psycopg2', user=user, password=password, database=database, host=host)
+    Registry.DBPOOL = adbapi.ConnectionPool('psycopg2', user=user, password=password, database=database, host=host, cp_noisy=True, cp_reconnect=True)
 
 
 
